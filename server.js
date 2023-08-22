@@ -14,9 +14,9 @@ app.use((req, res, next) => {
     next()
 })
 
-// app.get('/', (req, res) => {
-//     res.json({message: "Welcome to App"})
-// })
+app.get('/', (req, res) => {
+    res.json({message: "Welcome to App"})
+})
 
 app.use('/api/routes', api_routes)
 
