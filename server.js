@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 app.use("/api/routes", router);
 
 mongoose
-  .connect(process.env.MONGO_URI_DEV)
+  .connect(process.env.MONGO_URI)
   .then(() => {
     app.listen(process.env.PORT, () => {
       console.log("Listing on port 4000!!!");
