@@ -19,9 +19,14 @@ const userSchema = new mongoose.Schema(
       min: 8,
       max: 255,
     },
-    role: {
+    studentId: {
+      type: String,
+    },
+    academicYear: {
       type: Number,
-      required: true,
+    },
+    major: {
+      type: String,
     },
   },
   { timestamps: true }

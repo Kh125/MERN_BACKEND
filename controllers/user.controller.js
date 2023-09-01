@@ -22,14 +22,13 @@ const createUser = async (req, res) => {
     username: req.body.username,
     email: req.body.email,
     password: hashPassword,
-    role: req.body.role,
   });
 
   try {
     await user.save();
-    return res.status(200).send("registered successfully");
-  } catch {
-    return res.status(400);
+    return res.status(200).send({ message: "Successfully Registered" });
+  } catch (e) {
+    return res.status(400).send(e);
   }
 };
 
@@ -48,9 +47,38 @@ const loginUser = async (req, res) => {
     const token = jwt.sign({ user: user._id }, process.env.TOKEN_SECRET);
 
     return res
-      .cookie("authToken", token, { httpOnly: true })
+      .cookie("authToken", token, { httpOnly: true, overwrite: true })
       .status(200)
-      .send("Logged In Successfully");
+      .send({ message: "Successfully Logged in" });
   }
 };
-module.exports = { createUser, loginUser };
+
+const fillAcademicInfo = async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(
+      res.user.user,
+      {
+        studentId: req.body.studentId,
+        academicYear: req.body.academicYear,
+        major: req.body.major,
+      },
+      { new: true }
+    );
+
+    const token = jwt.sign(
+      {
+        user: res.user.user,
+        major: user.major,
+        academicYear: user.academicYear,
+      },
+      process.env.TOKEN_SECRET
+    );
+    console.log(token);
+
+    res
+      .cookie("authToken", token, { httpOnly: true, overwrite: true })
+      .status(200)
+      .send({ message: "Successfully Updated" });
+  } catch (e) {}
+};
+module.exports = { createUser, loginUser, fillAcademicInfo };

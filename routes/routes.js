@@ -1,7 +1,7 @@
 const user = require("./user.route");
-const data = require("./sampleData.route");
+const schedule = require("./schedules.route");
 
 module.exports = (router) => {
   user(router);
-  data(router);
+  schedule(router);
 };

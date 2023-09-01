@@ -6,12 +6,11 @@ const createUserValidation = (data) => {
     email: joi
       .string()
       .email({
-        tlds: { allow: ["com"] },
+        tlds: { allow: ["com", "edu", "mm"] },
       })
       .max(255)
       .required(),
     password: joi.string().min(8).max(255).required(),
-    role: joi.number().required(),
   });
 
   return schema.validate(data);
