@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const mongoose = require("mongoose");
 const express = require("express");
+const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const router = express.Router();
 
@@ -11,6 +12,7 @@ const routes = require("./routes/routes");
 const app = express();
 
 // middleware
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 

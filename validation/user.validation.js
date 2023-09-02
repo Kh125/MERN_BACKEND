@@ -20,7 +20,7 @@ const loginValidation = (data) => {
     email: joi
       .string()
       .email({
-        tlds: { allow: ["com"] },
+        tlds: { allow: ["com", "edu", "mm"] },
       })
       .max(255)
       .required(),
