@@ -44,7 +44,10 @@ const loginUser = async (req, res) => {
   if (!passwordMatch) res.status(400).send({ error: "Incorrect Password" });
 
   if (passwordMatch) {
-    const token = jwt.sign({ user: user._id }, process.env.TOKEN_SECRET);
+    const token = jwt.sign(
+      { user: user._id, major: user.major, academicYear: user.academicYear },
+      process.env.TOKEN_SECRET
+    );
 
     return res
       .cookie("authToken", token, { httpOnly: true, overwrite: true })
@@ -73,7 +76,6 @@ const fillAcademicInfo = async (req, res) => {
       },
       process.env.TOKEN_SECRET
     );
-    console.log(token);
 
     res
       .cookie("authToken", token, { httpOnly: true, overwrite: true })
