@@ -83,4 +83,14 @@ const fillAcademicInfo = async (req, res) => {
       .send({ message: "Successfully Updated" });
   } catch (e) {}
 };
-module.exports = { createUser, loginUser, fillAcademicInfo };
+
+const getUser = async (req, res) => {
+  const user = await User.findById(res.user.user);
+  res.status(200).send(user);
+};
+const logout = (req, res) => {
+  res.clearCookie("authToken");
+  res.status(200).send({ message: "Logged Out" });
+};
+
+module.exports = { createUser, loginUser, fillAcademicInfo, getUser, logout };
