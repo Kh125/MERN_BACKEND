@@ -80,7 +80,7 @@ const fillAcademicInfo = async (req, res) => {
     res
       .cookie("authToken", token, { httpOnly: true, overwrite: true })
       .status(200)
-      .send({ message: "Successfully Updated" });
+      .send({ message: "Successfully Updated", user });
   } catch (e) {}
 };
 
