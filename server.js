@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 const mongoose = require("mongoose");
+const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
@@ -15,10 +16,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use(express.static(path.join(__dirname, "dist")));
 
 routes(router);
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to App" });
+  res.sendFile(path.join("index.html"));
 });
 
 app.use("/api/routes", router);
