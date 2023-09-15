@@ -3,7 +3,7 @@ const fetch = (...args) =>
 	import('node-fetch').then(({default: fetch}) => fetch(...args));
 
 const moodleWeeklySchedule = async (req, res) => {
-  const url = `http://34.129.49.110/webservice/rest/server.php?wstoken=${process.env.WSTOKEN}&wsfunction=core_course_get_courses&moodlewsrestformat=json`;
+  const url = `http://34.129.49.110/webservice/rest/server.php?wstoken=${process.env.WSTOKEN}&wsfunction=${req.body.function}&moodlewsrestformat=json`;
 
   try {
     const response = await fetch(url, {
