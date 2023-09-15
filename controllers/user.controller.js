@@ -52,7 +52,10 @@ const loginUser = async (req, res) => {
     return res
       .cookie("authToken", token, { httpOnly: true, overwrite: true })
       .status(200)
-      .send({ message: "Successfully Logged in" });
+      .send({ 
+        message: "Successfully Logged in",
+        user
+      });
   }
 };
 
